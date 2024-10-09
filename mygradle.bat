@@ -9,7 +9,10 @@ set proxyKey=proxyHost
 ::代理服务器字符串
 set proxyHost=systemProp.https.proxyHost=127.0.0.1
 set proxyPort=systemProp.https.proxyPort=10809
-set file_path=%WORKSPACE%%filename%
+::set file_path=%WORKSPACE%%filename%
+
+set file_path=C:\ProgramData\Jenkins\.jenkins\workspace\yingwen\gradle.properties
+
 if exist !file_path! (
         ::读取文件内容
        set file_content=
@@ -25,11 +28,16 @@ if exist !file_path! (
       ) else (
         ::在文件插入代理设置字符
         echo set proxy server.....
-        echo %proxyHost%>>!file_path!
-        echo %proxyPort%>>!file_path!
+        ::echo.是换行
+        echo. >>!file_path! & echo %proxyHost%>>!file_path!
+        echo. >>!file_path! & echo %proxyPort%>>!file_path!
       )
     ) else (
       echo  workespace no hava gradle.properties
     )
 
 endlocal
+::脚步执行完，设置结果为0
+exit 0
+
+
