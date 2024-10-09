@@ -3,28 +3,21 @@
 
 setlocal enabledelayedexpansion
 
-set filename=gradle.properties
+set filename=\gradle.properties
 ::文件是否有该字段
 set proxyKey=proxyHost
-::set test=E:\studycode\batstudy
 ::代理服务器字符串
 set proxyHost=systemProp.https.proxyHost=127.0.0.1
 set proxyPort=systemProp.https.proxyPort=10809
-
-::在工作空间搜索到gradle.properties
-for /r %%i in (%filename%) do (
-    echo "find the gradle.properties"
-    set file_path=%%i
-    ::判断文件是否存在
-    echo !file_path!
-    if exist !file_path! (
+set file_path=%WORKSPACE%%filename%
+if exist !file_path! (
         ::读取文件内容
        set file_content=
        for /f "eol=# delims=" %%j in (!file_path!) do (
            set file_content=!file_content!%%j
-       ) 
+       )
        echo File content: !file_content!
-       
+
       ::查找是否设置了代理
       echo !file_content! | findstr "%proxyKey%" >nul
       if %errorlevel% equ 0 (
@@ -38,6 +31,6 @@ for /r %%i in (%filename%) do (
     ) else (
       echo  workespace no hava gradle.properties
     )
-)
+
 endlocal
 
