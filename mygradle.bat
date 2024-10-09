@@ -19,8 +19,8 @@ if exist !file_path! (
        echo File content: !file_content!
 
       ::查找是否设置了代理
-      echo !file_content! | findstr "%proxyKey%" >nul
-      if %errorlevel% equ 0 (
+      echo !file_content! | findstr "!proxyKey!" >nul
+      if !errorlevel! equ 0 (
         echo have set proxy server!
       ) else (
         ::在文件插入代理设置字符
@@ -33,4 +33,3 @@ if exist !file_path! (
     )
 
 endlocal
-
