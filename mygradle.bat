@@ -29,7 +29,7 @@ if exist !file_path! (
         ::在文件插入代理设置字符
         echo set proxy server.....
         ::echo.是换行
-        echo.^>>!file_path! & echo %proxyHost%>>!file_path!
+        echo:>>!file_path! && echo %proxyHost%>>!file_path!
         echo %proxyPort%>>!file_path!
       )
     ) else (
